@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Deal Ledger — Black Friday 2026 Verified Deal Finder</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Crect x='2' y='2' width='32' height='32' rx='6' fill='%2316130e'/%3E%3Cpath d='M9 11h18M9 18h12M9 25h15' stroke='%23faf7f0' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='26' cy='18' r='3.5' fill='%23b3261e'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to deals</a>
+
+  <header class="masthead">
+    <div class="masthead-inner">
+      <div class="brand-row">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 36 36" width="36" height="36" fill="none">
+            <rect x="2" y="2" width="32" height="32" rx="6" fill="#16130e"/>
+            <path d="M9 11h18M9 18h12M9 25h15" stroke="#faf7f0" stroke-width="2.4" stroke-linecap="round"/>
+            <circle cx="26" cy="18" r="3.5" fill="#b3261e"/>
+          </svg>
+        </div>
+        <div class="brand-copy">
+          <p class="edition-tag">Edition 2026 · Audited 27 Nov UTC</p>
+          <h1>The Deal Ledger</h1>
+          <p class="subtitle">Forty Black Friday &amp; Cyber Monday deals opened, price-checked, and weighed against list price—zero ads, zero tracking, zero invented discounts.</p>
+        </div>
+        <nav class="top-nav" aria-label="Primary navigation">
+          <a class="nav-link" href="#deals-section">Deals</a>
+          <a class="nav-link" href="#methodology">Audit Method</a>
+          <button id="open-basket-nav" class="nav-basket-btn" type="button">
+            Shortlist <span id="nav-basket-count" class="pill-count">0</span>
+          </button>
+        </nav>
+      </div>
+
+      <dl id="masthead-stats" class="masthead-stats" aria-label="Audit summary">
+        <div class="stat-box">
+          <dt>Verified Deals</dt>
+          <dd id="stat-total">40</dd>
+        </div>
+        <div class="stat-box">
+          <dt>Average Cut</dt>
+          <dd id="stat-avg">40.0%</dd>
+        </div>
+        <div class="stat-box">
+          <dt>Steep Cuts</dt>
+          <dd id="stat-steep">0</dd>
+        </div>
+        <div class="stat-box">
+          <dt>Last Checked</dt>
+          <dd id="stat-checked">2026-11-27 10:10 UTC</dd>
+        </div>
+      </dl>
+    </div>
+  </header>
+
+  <main id="main" class="page-main">
+    <section class="controls-panel" aria-label="Search and filter deals">
+      <div class="search-row">
+        <label class="field-label" for="search">Search deals <span class="kbd-hint">Press /</span></label>
+        <div class="search-input-wrap">
+          <input id="search" type="search" autocomplete="off" placeholder="Search product, brand, store, or category…">
+          <button id="clear-search" class="clear-search-btn" type="button" hidden aria-label="Clear search">Clear</button>
+        </div>
+      </div>
+
+      <div class="filter-grid">
+        <div class="filter-field">
+          <label class="field-label" for="category">Category</label>
+          <select id="category">
+            <option value="all">All categories (40)</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label class="field-label" for="store">Store</label>
+          <select id="store">
+            <option value="all">All stores</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label class="field-label" for="min-off">Min discount</label>
+          <select id="min-off">
+            <option value="0">Any discount</option>
+            <option value="25">25% off or more</option>
+            <option value="40">40% off or more</option>
+            <option value="50">50% off or more</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label class="field-label" for="max-price">Max price</label>
+          <select id="max-price">
+            <option value="0">Any price</option>
+            <option value="100">Under $100</option>
+            <option value="300">Under $300</option>
+            <option value="1000">Under $1,000</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label class="field-label" for="sort">Sort by</label>
+          <select id="sort">
+            <option value="top">Top Picks (value + %)</option>
+            <option value="pct">Biggest % Off</option>
+            <option value="saved">Most $ Saved</option>
+            <option value="price">Lowest Price</option>
+          </select>
+        </div>
+
+        <div class="filter-actions">
+          <button id="clear-filters" class="btn-secondary" type="button">Clear all</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="status-bar">
+      <p id="result-count" role="status" aria-live="polite">Showing 40 of 40 verified deals</p>
+      <p class="status-hint">Click any card for price proof, source citation, and direct store link.</p>
+    </div>
+
+    <section id="deals-section" aria-label="Verified deals ledger">
+      <div id="deal-grid" class="deal-grid"></div>
+      <div id="empty-state" class="empty-state" hidden>
+        <h3>No deals match those filters</h3>
+        <p>Try lowering the minimum discount, raising the price cap, or clearing your search query.</p>
+        <button id="empty-clear" class="btn-primary" type="button">Clear all filters</button>
+      </div>
+    </section>
+
+    <section id="methodology" class="methodology-section" aria-labelledby="method-heading">
+      <div class="method-header">
+        <h2 id="method-heading">Verification Methodology &amp; Ledger Breakdown</h2>
+        <p>Every item in this ledger was opened directly at the store URL or verified against same-day deals coverage naming the store on 27 Nov 2026 (UTC). Unverified or ambiguous SKUs were excluded.</p>
+      </div>
+      <div id="methodology-body" class="method-grid"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p><strong>The Deal Ledger</strong> · Offline static edition · All prices in USD as checked 2026-11-27 UTC · Store links open directly on the merchant site.</p>
+  </footer>
+
+  <button id="basket-fab" class="basket-fab" type="button" aria-label="Open savings basket">
+    <span class="fab-label">Shortlist</span>
+    <span id="fab-count" class="fab-count">0</span>
+    <span id="fab-saved" class="fab-saved">$0 saved</span>
+  </button>
+
+  <dialog id="detail-dialog" class="ledger-dialog detail-dialog" aria-labelledby="detail-title">
+    <div id="detail-content" class="dialog-shell"></div>
+  </dialog>
+
+  <dialog id="basket-dialog" class="ledger-dialog basket-dialog" aria-labelledby="basket-title">
+    <div id="basket-content" class="dialog-shell"></div>
+  </dialog>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
